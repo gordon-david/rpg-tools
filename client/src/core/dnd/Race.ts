@@ -22,7 +22,5 @@ export class Race implements IRace {
   entries: IEntry[] = [];
   subraces: Race[] = [];
 
-  static buildFromJson(data: any){
-
-  }
+  
 }

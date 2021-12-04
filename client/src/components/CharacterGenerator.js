@@ -1,25 +1,7 @@
-import './App.css';
-import { DNDCharacter } from './core/dnd/DNDCharacter';
+import { DNDCharacter } from '../core/dnd/DNDCharacter';
 import { useState } from 'react';
 
 const _character = new DNDCharacter()
-
-// let races_data;
-// fetch("/static/data/races.json")
-//   .then(r => r.json())
-//   .then(d => races_data = d["race"])
-//   .then(() => {
-//     console.log(prettyPrint(races_data[0]))
-//     console.log(JSON.stringify(races_data[0]))
-//   })
-
-// function prettyPrint(d){
-//   let result =  `${d["name"]} \n`
-//   for( let i in d["entries"]){
-//     result += (`${d["entries"][i]["entries"]} \n`)
-//   }
-//   return result
-// }
 
 function CharacterGenerator() {
   const [characterData, setCharacterData] = useState(_character.serialize())
@@ -55,8 +37,7 @@ function CharacterGenerator() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
+      <section>
         <section>
           <span>Proficiency Bonus: {characterData.proficiencyBonus}</span>
           <button onClick={incrementProficiency}>+</button>
@@ -97,7 +78,6 @@ function CharacterGenerator() {
             }
           </ul>
         </section>
-        <div>
           <h4>Skills</h4>
           <ul>
             {Object.values(characterData.skills).map(s =>
@@ -115,9 +95,7 @@ function CharacterGenerator() {
               </li>
             )}
           </ul>
-        </div>
-      </header>
-    </div>
+      </section>
   );
 }
 
