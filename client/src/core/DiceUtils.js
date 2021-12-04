@@ -360,6 +360,7 @@ const DicePool = (diceTypeArray) => {
  }
 }
 
+
 module.exports = {
  DiceTypes,
  DiceFaces,
