@@ -110,12 +110,12 @@ export class Skill {
 
   // calculated properties
   get finalValue() {
-    const profBonus = (this.isProficient) ? this.derivedProficiency.value : 0
     return this.derivedAbility.finalValue +
-      this.bonuses.reduce((sum, e) => e.value + sum, 0) + profBonus
+    this.bonuses.reduce((sum, e) => e.value + sum, 0)
   }
   get modifier() {
-    return Math.floor(this.finalValue / 2) - 5;
+    const profBonus = (this.isProficient) ? this.derivedProficiency.value : 0
+    return Math.floor(this.finalValue / 2) - 5 + profBonus;
   }
   serialize() {
     return {
