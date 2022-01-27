@@ -1,12 +1,12 @@
-export const AbilityName = {
-  strength: "Strength",
-  dexterity: "Dexterity",
-  intelligence: "Intelligence",
-  constitution: "Constitution",
-  charisma: "Charisma",
-  wisdom: "Wisdom",
-  none: 'none'
-}
+// export const AbilityName = {
+//   strength: "Strength",
+//   dexterity: "Dexterity",
+//   intelligence: "Intelligence",
+//   constitution: "Constitution",
+//   charisma: "Charisma",
+//   wisdom: "Wisdom",
+//   none: 'none'
+// }
 
 export class AttributeBonus {
   value: number
@@ -19,11 +19,13 @@ export class AttributeBonus {
 }
 
 export class Ability {
-  name: string
+  key: string
+  displayName: string
   baseValue: number
   bonuses: AttributeBonus[]
-  constructor(name: string, { baseValue = 10, bonuses = [] }: { baseValue?: number, bonuses?: AttributeBonus[] } = {}) {
-    this.name = name
+  constructor(key: string, displayName: string, { baseValue = 10, bonuses = [] }: { baseValue?: number, bonuses?: AttributeBonus[] } = {}) {
+    this.key = key
+    this.displayName = displayName
     this.baseValue = baseValue
     this.bonuses = bonuses
   }
@@ -38,7 +40,8 @@ export class Ability {
 
   serialize() {
     return {
-      name: this.name,
+      key: this.key,
+      displayName: this.displayName,
       baseValue: this.baseValue,
       bonuses: this.bonuses,
       finalValue: this.finalValue,
@@ -68,40 +71,48 @@ export class ProficiencyBonus {
   }
 }
 
-export const SkillName = {
-  none: "none",
-  acrobatics: "acrobatics",
-  animal_handling: "animal_handling",
-  arcana: "arcana",
-  athletics: "athletics",
-  deception: "deception",
-  history: "history",
-  insight: "insight",
-  intimidation: "intimidation",
-  investigation: "investigation",
-  medicine: "medicine",
-  nature: "nature",
-  perception: 'perception',
-  performance: "performance",
-  persuasion: "persuasion",
-  religion: "religion",
-  sleight_of_hand: "sleight_of_hand",
-  stealth: "stealth",
-  survival: "survival"
-}
+// export const SkillName = {
+//   none: "none",
+//   acrobatics: "acrobatics",
+//   animal_handling: "animal_handling",
+//   arcana: "arcana",
+//   athletics: "athletics",
+//   deception: "deception",
+//   history: "history",
+//   insight: "insight",
+//   intimidation: "intimidation",
+//   investigation: "investigation",
+//   medicine: "medicine",
+//   nature: "nature",
+//   perception: 'perception',
+//   performance: "performance",
+//   persuasion: "persuasion",
+//   religion: "religion",
+//   sleight_of_hand: "sleight_of_hand",
+//   stealth: "stealth",
+//   survival: "survival"
+// }
 export class Skill {
-  name: string
+  key: string
+  displayName: string
   bonuses: AttributeBonus[]
   isProficient: boolean
   derivedAbility: Ability
   derivedProficiency: ProficiencyBonus
-  constructor(name: string, {
-    bonuses = [],
-    isProficient = false,
-    derivedAbility = new Ability(AbilityName.none),
-    derivedProficiency = new ProficiencyBonus()
-  } = {}) {
-    this.name = name
+
+  constructor(key: string,
+    displayName: string,
+    derivedAbility: Ability,
+    derivedProficiency: ProficiencyBonus,
+    {
+      bonuses = [],
+      isProficient = false,
+    }: {
+      bonuses?: any[],
+      isProficient?: boolean
+    } = {}) {
+    this.key = key
+    this.displayName = displayName
     this.bonuses = bonuses
     this.isProficient = isProficient
     this.derivedAbility = derivedAbility
@@ -111,7 +122,7 @@ export class Skill {
   // calculated properties
   get finalValue() {
     return this.derivedAbility.finalValue +
-    this.bonuses.reduce((sum, e) => e.value + sum, 0)
+      this.bonuses.reduce((sum, e) => e.value + sum, 0)
   }
   get modifier() {
     const profBonus = (this.isProficient) ? this.derivedProficiency.value : 0
@@ -123,25 +134,30 @@ export class Skill {
       isProficient: this.isProficient,
       finalValue: this.finalValue,
       modifier: this.modifier,
-      name: this.name,
-      derivedAbility: this.derivedAbility.name
+      key: this.key,
+      displayName: this.displayName,
+      derivedAbility: this.derivedAbility.key
     }
   }
 }
 
 export class Save {
-  name: string
+  key: string
+  displayName: string
   bonuses: AttributeBonus[]
   isProficient: boolean
   derivedAbility: Ability
   derivedProficiency: ProficiencyBonus
-  constructor(name: string, {
-    bonuses = [],
-    isProficient = false,
-    derivedAbility = new Ability(AbilityName.none),
-    derivedProficiency = new ProficiencyBonus()
-  } = {}) {
-    this.name = name
+  constructor(key: string,
+    displayName: string,
+    derivedAbility: Ability,
+    derivedProficiency: ProficiencyBonus,
+    {
+      bonuses = [],
+      isProficient = false,
+    } = {}) {
+    this.key = key
+    this.displayName = displayName
     this.bonuses = bonuses
     this.isProficient = isProficient
     this.derivedAbility = derivedAbility
@@ -163,8 +179,8 @@ export class Save {
       isProficient: this.isProficient,
       finalValue: this.finalValue,
       modifier: this.modifier,
-      name: this.name,
-      derivedAbility: this.derivedAbility.name
+      name: this.key,
+      derivedAbility: this.derivedAbility.key
     };
   }
 }
@@ -217,51 +233,45 @@ export class DNDCharacter {
   proficiencyBonus: ProficiencyBonus
 
   constructor() {
+    this.proficiencyBonus = new ProficiencyBonus()
     this.abilities = {
-      strength: new Ability("strength"),
-      dexterity: new Ability("dexterity"),
-      intelligence: new Ability("intelligence"),
-      constitution: new Ability("constitution"),
-      charisma: new Ability("charisma"),
-      wisdom: new Ability("wisdom"),
+      strength: new Ability("strength", "Strength"),
+      dexterity: new Ability("dexterity", "Dexterity"),
+      intelligence: new Ability("intelligence", "Intelligence"),
+      constitution: new Ability("constitution", "Constitution"),
+      charisma: new Ability("charisma", "Charisma"),
+      wisdom: new Ability("wisdom", "Wisdom"),
     }
 
     this.skills = {
-      acrobatics: new Skill("acrobatics"),
-      animal_handling: new Skill("animal_handling"),
-      arcana: new Skill("arcana"),
-      athletics: new Skill("athletics"),
-      deception: new Skill("deception"),
-      history: new Skill("history"),
-      insight: new Skill("insight"),
-      intimidation: new Skill("intimidation"),
-      investigation: new Skill("investigation"),
-      medicine: new Skill("medicine"),
-      nature: new Skill("nature"),
-      perception: new Skill("perception"),
-      performance: new Skill("performance"),
-      persuasion: new Skill("persuasion"),
-      religion: new Skill("religino"),
-      sleight_of_hand: new Skill("sleight_of_hand"),
-      stealth: new Skill("stealth"),
-      survival: new Skill("survival"),
+      acrobatics: new Skill("acrobatics", "Acrobatics", this.abilities.dexterity, this.proficiencyBonus),
+      animal_handling: new Skill("animal_handling", "Animal Handling", this.abilities.wisdom, this.proficiencyBonus),
+      arcana: new Skill("arcana", "Arcana", this.abilities.intelligence, this.proficiencyBonus),
+      athletics: new Skill("athletics", "Athletics", this.abilities.strength, this.proficiencyBonus),
+      deception: new Skill("deception", "Deception", this.abilities.charisma, this.proficiencyBonus),
+      history: new Skill("history", "History", this.abilities.intelligence, this.proficiencyBonus),
+      insight: new Skill("insight", "Insight", this.abilities.wisdom, this.proficiencyBonus),
+      intimidation: new Skill("intimidation", "Intimidation", this.abilities.charisma, this.proficiencyBonus),
+      investigation: new Skill("investigation", "Investigation", this.abilities.intelligence, this.proficiencyBonus),
+      medicine: new Skill("medicine", "Medicine", this.abilities.wisdom, this.proficiencyBonus),
+      nature: new Skill("nature", "Nature", this.abilities.intelligence, this.proficiencyBonus),
+      perception: new Skill("perception", "Perception", this.abilities.wisdom, this.proficiencyBonus),
+      performance: new Skill("performance", "Performance", this.abilities.charisma, this.proficiencyBonus),
+      persuasion: new Skill("persuasion", "Persuasion", this.abilities.charisma, this.proficiencyBonus),
+      religion: new Skill("religion", "Religion", this.abilities.intelligence, this.proficiencyBonus),
+      sleight_of_hand: new Skill("sleight_of_hand", "Sleight of Hand", this.abilities.dexterity, this.proficiencyBonus),
+      stealth: new Skill("stealth", "Stealth", this.abilities.dexterity, this.proficiencyBonus),
+      survival: new Skill("survival", "Survival", this.abilities.wisdom, this.proficiencyBonus),
     }
 
     this.saves = {
-      strength: new Save("strength"),
-      dexterity: new Save("dexterity"),
-      intelligence: new Save("intelligence"),
-      constitution: new Save("constitution"),
-      charisma: new Save("charisma"),
-      wisdom: new Save("wisdom"),
+      strength: new Save("strength", "Strength", this.abilities.strength, this.proficiencyBonus),
+      dexterity: new Save("dexterity", "Dexterity", this.abilities.dexterity, this.proficiencyBonus),
+      intelligence: new Save("intelligence", "Intelligence", this.abilities.intelligence, this.proficiencyBonus),
+      constitution: new Save("constitution", "Constitution", this.abilities.constitution, this.proficiencyBonus),
+      charisma: new Save("charisma", "Charisma", this.abilities.charisma, this.proficiencyBonus),
+      wisdom: new Save("wisdom", "Wisdom", this.abilities.wisdom, this.proficiencyBonus),
     }
-
-    for (let s in AbilityName) {
-      if (s !== AbilityName.none)
-        this.saves[s] = new Save(s)
-    }
-
-    this.proficiencyBonus = new ProficiencyBonus()
 
     // map skills to abilities
     this.skills.acrobatics.derivedAbility = this.abilities.dexterity
@@ -283,25 +293,17 @@ export class DNDCharacter {
     this.skills.stealth.derivedAbility = this.abilities.dexterity
     this.skills.survival.derivedAbility = this.abilities.wisdom
 
-    // map proficiency bonus to saves and skills
-    for (let i in this.saves) {
-      this.saves[i].derivedProficiency = this.proficiencyBonus
-    }
+    // map proficiency bonus to skills
     for (let i in this.skills) {
       this.skills[i].derivedProficiency = this.proficiencyBonus
     }
-
-    // map saves to abilites
-    for (let i in this.saves) {
-      this.saves[i].derivedAbility = this.abilities[i]
-    }
   }
 
-  serialize(){
+  serialize() {
     let wrapper: any = {}
     wrapper.abilities = {}
 
-    for(let a in this.abilities){
+    for (let a in this.abilities) {
       wrapper.abilities[a] = this.abilities[a].serialize()
     }
 
