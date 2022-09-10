@@ -19,7 +19,7 @@ function DndCharacterContainer() {
     decrementBaseValue,
     saveProficiencyToggle,
     skillProficiencyToggle,
-    clear
+    clear,
   } = useCharacter();
 
   return (
@@ -28,7 +28,8 @@ function DndCharacterContainer() {
       <button onClick={clear}>clear</button>
       <div className="section  dnd-proficiency-bonus">
         <h4>Proficiency Bonus:</h4>
-        <SteppedValue displayText={`${character.proficiencyBonus.value}`}
+        <SteppedValue
+          displayText={`${character.proficiencyBonus.value}`}
           increment={incrementProficiency}
           decrement={decrementProficiency}
         />
@@ -37,11 +38,15 @@ function DndCharacterContainer() {
         <h4 className="section__header">Abilities </h4>
         <ul className="dnd-abilities">
           {Object.values(character.abilities).map((a) => (
-            <li className="dnd-abilities__item" key={`character-ability-${a.key}`}>
-              <span>
-                {a.displayName}
-              </span>
-              <SteppedValue displayText={`${a.finalValue} (${a.modifier >= 0 ? "+" : ""}${a.modifier})`}
+            <li
+              className="dnd-abilities__item"
+              key={`character-ability-${a.key}`}
+            >
+              <span>{a.displayName}</span>
+              <SteppedValue
+                displayText={`${a.finalValue} (${a.modifier >= 0 ? "+" : ""}${
+                  a.modifier
+                })`}
                 increment={() => incrementBaseValue(a.key)}
                 decrement={() => decrementBaseValue(a.key)}
               />

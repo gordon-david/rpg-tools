@@ -1,7 +1,5 @@
 import { Layout } from "../components/Layout";
 
 export function Home() {
-    return <Layout>
-        home
-    </Layout>
+  return <Layout>home</Layout>;
 }

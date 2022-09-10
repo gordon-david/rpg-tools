@@ -1,5 +1,3 @@
-import Spells from "../components/dnd-character/Spells"
+import Spells from "../components/dnd-character/Spells";
 
-export const SpellsPage = () => (
-    <Spells />
-);
+export const SpellsPage = () => <Spells />;

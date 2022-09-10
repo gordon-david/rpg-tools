@@ -34,5 +34,5 @@ export const enum Languages {
 }
 
 export const enum Sizes {
-  medium = "medium"
+  medium = "medium",
 }
