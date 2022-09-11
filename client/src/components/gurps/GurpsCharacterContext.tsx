@@ -34,34 +34,6 @@ export function GurpsCharacterProvider({ children }: any) {
   const [model, setModel] = useState({});
 
   useEffect(() => {
-    wrapper.character.addSkill(
-      new GurpsSkill(
-        "Brawling",
-        wrapper.character.basicTraits.dexterity,
-        SkillDifficulty.E
-      )
-    );
-    wrapper.character.addSkill(
-      new GurpsSkill(
-        "Boxing",
-        wrapper.character.basicTraits.dexterity,
-        SkillDifficulty.A
-      )
-    );
-    wrapper.character.addSkill(
-      new GurpsSkill(
-        "Karate",
-        wrapper.character.basicTraits.dexterity,
-        SkillDifficulty.H
-      )
-    );
-    wrapper.character.addSkill(
-      new GurpsSkill(
-        "Surgery",
-        wrapper.character.basicTraits.intelligence,
-        SkillDifficulty.VH
-      )
-    );
     update();
   }, []);
 
