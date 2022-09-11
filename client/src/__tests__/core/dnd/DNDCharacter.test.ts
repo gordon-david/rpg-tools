@@ -23,8 +23,6 @@ describe("Mutating ability should cascade mutations", () => {
   test("Update ability base value updates skill values", () => {
     const character = new DNDCharacter();
     // character.skills.athletics.derivedAbility = character.abilities.strength
-    console.log(character.skills.athletics);
-    console.log(character.skills["athletics"]);
     character.abilities.strength.baseValue = 10;
     expect(character.skills.athletics.finalValue).toEqual(10);
     character.abilities.strength.baseValue = 15;

@@ -6,8 +6,9 @@ export const Navbar = () => {
       <ul className="gray">
         <NavListing slug="/" title="Home" />
         <NavListing slug="/gurpscharacter" title="Gurps Character" />
-        <NavListing slug="/dndcharacter" title="D&D Character" />
-        <NavListing slug="/dndspells" title="D&D Spells" />
+        <NavListing slug="/dndcharacter" title="D&D 5E Character" />
+        <NavListing slug="/dndspells" title="D&D 5E Spells" />
+        <NavListing slug="/swadecharacter" title="SWADE Character" />
       </ul>
     </nav>
   );

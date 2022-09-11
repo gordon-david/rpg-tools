@@ -472,8 +472,6 @@ export class GurpsCharacterModel {
   }
 
   get totalPoints(): number {
-    console.log(this.extraPositiveTraits);
-
     return (
       Object.keys(this.basicTraits).reduce(
         (p, c) =>

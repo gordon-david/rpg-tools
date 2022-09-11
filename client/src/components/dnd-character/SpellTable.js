@@ -34,7 +34,6 @@ export default function SpellTable() {
         title: spellsContext.getRow(rowId)["name"],
       });
     }
-    console.log(toShow, rowId);
     setShowModal(toShow);
   };
 

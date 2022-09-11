@@ -320,8 +320,6 @@ const DicePool = (diceTypeArray) => {
 
   return {
     addDice(diceType) {
-      // console.log(currentSelection);
-
       currentSelection[diceType].push(DiceFactory(diceType));
     },
 
@@ -354,7 +352,6 @@ const DicePool = (diceTypeArray) => {
     },
 
     roll() {
-      // console.log(currentSelection)
       let genesysPool = [];
       let polyhedralPool = [];
       const polyhedralTypes = Object.values(DiceTypes.Polyhedral);
@@ -362,7 +359,6 @@ const DicePool = (diceTypeArray) => {
 
       Object.keys(currentSelection).forEach((diceType) => {
         if (polyhedralTypes.map((value) => value === diceType).length !== 0) {
-          console.log("---this shold not run --- ");
           currentSelection[diceType].forEach((dice) =>
             polyhedralPool.push(dice)
           );
@@ -371,7 +367,6 @@ const DicePool = (diceTypeArray) => {
           currentSelection[diceType].forEach((dice) => genesysPool.push(dice));
         }
       });
-      console.log(polyhedralTypes);
       const genesysResult = addGenesysDice(
         genesysPool.map((dice) => dice.roll())
       );

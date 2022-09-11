@@ -65,13 +65,8 @@ export class ProficiencyBonus {
   get value() {
     return this._value;
   }
-  set value(value) {
-    if (typeof value !== "number") {
-      console.log("prof bonus value NAN");
-      return;
-    }
+  set value(value: number) {
     if (value < 0) {
-      console.log("prof bonus value is negative");
       return;
     }
     this._value = value;
