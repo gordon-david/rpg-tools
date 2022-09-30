@@ -1,90 +1,207 @@
 function getInitialState() {
   return {
     attributes: {
-      agility: {},
-      strength: {},
-      spirit: {},
-      smarts: {},
-      vigor: {},
+      agility: { displayName: "Agility" },
+      strength: { displayName: "Strength" },
+      spirit: { displayName: "Spirit" },
+      smarts: { displayName: "Smarts" },
+      vigor: { displayName: "Vigor" },
     },
     skills: {
-      athletics: { core: true, derivedAttribute: "agility", points: 0 },
-      boating: { core: false, derivedAttribute: "agility", points: 0 },
-      driving: { core: false, derivedAttribute: "agility", points: 0 },
-      fighting: { core: false, derivedAttribute: "agility", points: 0 },
-      piloting: { core: false, derivedAttribute: "agility", points: 0 },
-      riding: { core: false, derivedAttribute: "agility", points: 0 },
-      shooting: { core: false, derivedAttribute: "agility", points: 0 },
-      stealth: { core: true, derivedAttribute: "agility", points: 0 },
-      thievery: { core: false, derivedAttribute: "agility", points: 0 },
-      common_knowledge: { core: true, derivedAttribute: "smarts", points: 0 },
-      academics: { core: false, derivedAttribute: "smarts", points: 0 },
-      battle: { core: false, derivedAttribute: "smarts", points: 0 },
-      gambling: { core: false, derivedAttribute: "smarts", points: 0 },
-      healing: { core: false, derivedAttribute: "smarts", points: 0 },
-      language: { core: false, derivedAttribute: "smarts", points: 0 },
-      notice: { core: true, derivedAttribute: "smarts", points: 0 },
-      occult: { core: false, derivedAttribute: "smarts", points: 0 },
-      research: { core: false, derivedAttribute: "smarts", points: 0 },
-      repair: { core: false, derivedAttribute: "smarts", points: 0 },
-      science: { core: false, derivedAttribute: "smarts", points: 0 },
-      survival: { core: false, derivedAttribute: "smarts", points: 0 },
-      taunt: { core: false, derivedAttribute: "smarts", points: 0 },
-      spellcasting: { core: false, derivedAttribute: "smarts", points: 0 },
-      psionics: { core: false, derivedAttribute: "smarts", points: 0 },
-      electronics: { core: false, derivedAttribute: "smarts", points: 0 },
-      hacking: { core: false, derivedAttribute: "smarts", points: 0 },
-      weird_science: { core: false, derivedAttribute: "smarts", points: 0 },
-      persuasion: { core: true, derivedAttribute: "spirit", points: 0 },
-      faith: { core: false, derivedAttribute: "spirit", points: 0 },
-      intimidation: { core: false, derivedAttribute: "spirit", points: 0 },
-      performance: { core: false, derivedAttribute: "spirit", points: 0 },
-      focus: { core: false, derivedAttribute: "spirit", points: 0 },
+      athletics: {
+        displayName: "Athletics",
+        core: true,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      boating: {
+        displayName: "Boating",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      driving: {
+        displayName: "Driving",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      fighting: {
+        displayName: "Fighting",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      piloting: {
+        displayName: "Piloting",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      riding: {
+        displayName: "Riding",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      shooting: {
+        displayName: "Shooting",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      stealth: {
+        displayName: "Stealth",
+        core: true,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      thievery: {
+        displayName: "Thievery",
+        core: false,
+        derivedAttribute: "agility",
+        points: 0,
+      },
+      common_knowledge: {
+        displayName: "Common Knowledge",
+        core: true,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      academics: {
+        displayName: "Academics",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      battle: {
+        displayName: "Battle",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      gambling: {
+        displayName: "Gambling",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      healing: {
+        displayName: "Healing",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      language: {
+        displayName: "Language",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      notice: {
+        displayName: "Notice",
+        core: true,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      occult: {
+        displayName: "Occult",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      research: {
+        displayName: "Research",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      repair: {
+        displayName: "Repair",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      science: {
+        displayName: "Science",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      survival: {
+        displayName: "Survival",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      taunt: {
+        displayName: "Taunt",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      spellcasting: {
+        displayName: "Spellcasting",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      psionics: {
+        displayName: "Psionics",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      electronics: {
+        displayName: "Electronics",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      hacking: {
+        displayName: "Hacking",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      weird_science: {
+        displayName: "Wierd Science",
+        core: false,
+        derivedAttribute: "smarts",
+        points: 0,
+      },
+      persuasion: {
+        displayName: "Persuasion",
+        core: true,
+        derivedAttribute: "spirit",
+        points: 0,
+      },
+      faith: {
+        displayName: "Faith",
+        core: false,
+        derivedAttribute: "spirit",
+        points: 0,
+      },
+      intimidation: {
+        displayName: "Intimidation",
+        core: false,
+        derivedAttribute: "spirit",
+        points: 0,
+      },
+      performance: {
+        displayName: "Performance",
+        core: false,
+        derivedAttribute: "spirit",
+        points: 0,
+      },
+      focus: {
+        displayName: "Focus",
+        core: false,
+        derivedAttribute: "spirit",
+        points: 0,
+      },
     },
   };
-}
-
-export enum AttributeNames {
-  agility = "Agility",
-  strength = "Strength",
-  spirit = "Spirit",
-  smarts = "Smarts",
-  vigor = "Vigor",
-}
-
-export enum SkillNames {
-  athletics = "Athletics",
-  boating = "Boating",
-  driving = "Driving",
-  fighting = "Fighting",
-  piloting = "Piloting",
-  riding = "Fiding",
-  shooting = "Shooting",
-  stealth = "Stealth",
-  thievery = "Thievery",
-  common_knowledge = "Common Knowledge",
-  academics = "Academics",
-  battle = "Battle",
-  gambling = "Gambling",
-  healing = "Healing",
-  language = "Language",
-  notice = "Notice",
-  occult = "Occult",
-  research = "Research",
-  repair = "Repair",
-  science = "Science",
-  survival = "Survival",
-  taunt = "Taunt",
-  spellcasting = "Spellcasting",
-  psionics = "Psionics",
-  electronics = "Electronics",
-  hacking = "Hacking",
-  weird_science = "Weird Science",
-  persuasion = "Persuasion",
-  faith = "Faith",
-  intimidation = "Intimidation",
-  performance = "Performance",
-  focus = "Focus",
 }
 
 /*
@@ -120,10 +237,12 @@ function pointValueDieCode(dieRank: number): string | undefined {
 export class SwadeAttribute {
   _points: number;
   name: string;
+  displayName: string;
 
-  constructor({ name = "", points = 0 } = {}) {
+  constructor({ name = "", displayName = "", points = 0 } = {}) {
     this.name = name;
     this._points = points;
+    this.displayName = displayName;
   }
 
   get dieRank() {
@@ -168,16 +287,19 @@ export class SwadeAttribute {
 export class SwadeSkill {
   _points: number = 0;
   name: string;
+  displayName: string;
   isCore: boolean = false;
   derivedAttribute: SwadeAttribute;
 
   constructor({
     name = "",
+    displayName = "",
     isCore = false,
     points = 0,
     derivedAttribute = new SwadeAttribute(),
   } = {}) {
     this.name = name;
+    this.displayName = displayName;
     this._points = points;
     this.isCore = isCore;
     this.derivedAttribute = derivedAttribute;
@@ -266,12 +388,14 @@ export class SwadeCharacter {
       this.attributes[attributeKey] = new SwadeAttribute({
         name: `${attributeKey}`,
         points: oldState.attributes[attributeKey].points,
+				displayName: oldState.attributes[attributeKey].displayName
       });
     }
 
     // build skills from old state data
     for (let skillKey of Object.keys(oldState.skills)) {
       this.skills[skillKey] = new SwadeSkill({
+				displayName: oldState.skills[skillKey].displayName,
         name: `${skillKey}`,
         points: oldState.skills[skillKey].points,
         isCore: oldState.skills[skillKey].core,

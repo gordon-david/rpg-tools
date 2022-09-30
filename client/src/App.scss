@@ -151,22 +151,22 @@ nav {
 
   .card {
     margin: 20px auto;
-    max-width: 300px;
+    max-width: 400px;
   }
 
-	.swade-attributes__item {
-		display: flex;
-		justify-content: space-between;
-	}
+  .swade-attributes__item {
+    display: flex;
+    justify-content: space-between;
+  }
 
-	.swade-skills__item{
-		display: flex;
-		justify-content: space-between;
-	}
-	.stepped-value__display-text {
-		min-width: 3rem;
-		padding: 0 .25rem;
-	}
+  .swade-skills__item {
+    display: flex;
+    justify-content: space-between;
+  }
+  .stepped-value__display-text {
+    min-width: 3rem;
+    padding: 0 0.25rem;
+  }
 }
 
 /* Gurps Character Creator */

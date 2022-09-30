@@ -14,7 +14,7 @@ export function AddNegativeExtraTraitForm() {
   const handleCostChange = (e: any) => {
     e.preventDefault();
     let val = e.target.value;
-    if (typeof val !== "number" && val !== "-") {
+    if (typeof val !== "number") {
       val = parseInt(val);
     }
     setCost((prev) => val);
@@ -22,7 +22,7 @@ export function AddNegativeExtraTraitForm() {
 
   const save = (e: any) => {
     e.preventDefault();
-    addNegativeExtraTrait(name, cost);
+    addNegativeExtraTrait(name, cost > 0 ? cost * -1 : cost);
     setName((prev) => "");
     setCost((prev) => 0);
   };
