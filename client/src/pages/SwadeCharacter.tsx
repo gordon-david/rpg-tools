@@ -1,4 +1,4 @@
-import { SwadeCharacter } from "../core/swade/swade-character";
+import { SwadeCharacter, SwadeSkill, SkillNames, AttributeNames } from "../core/swade/swade-character";
 import { useState, useEffect } from "react";
 import { Layout } from "../components/Layout";
 import { SteppedValue } from "../components/common/StepValueNumericInput";
@@ -60,38 +60,49 @@ export function SwadeCharacterPage() {
 
   return (
     <Layout>
-      Total Points: {characterData && characterData.totalPoints}
-      <br></br>
-      Attributes:
-      {characterData && [
-        Object.values(characterData.attributes).map((att: any) => (
-          <SwadeAttributeDisplay
-            key={att.name}
-            name={att.name}
-            points={att.points}
-            dieRank={att.dieRank}
-            increment={() => incrementAttribute(att.name)}
-            decrement={() => decrementAttribute(att.name)}
-          />
-        )),
-      ]}
-      Skills:
-      <br></br>
-      {characterData &&
-        Object.values(characterData.skills).map((skill: any) => (
-          <SwadeSkillDisplay
-            key={skill.name}
-            name={skill.name}
-            points={skill.points}
-            dieRank={skill.dieRank}
-            increment={() => incrementSkill(skill.name)}
-            decrement={() => decrementSkill(skill.name)}
-            isCore={skill.isCore}
-          />
-        ))}
+      <div className="swade-character">
+        Total Points: {`${characterData.totalPoints}`}
+        <div className="card">
+          Attributes:
+            <div>{`Attribute Points: ${characterData.totalAttributePoints}`}</div>
+            {Object.values(characterData.attributes).map((att: any) => (
+              <SwadeAttributeDisplay
+                key={att.name}
+                name={att.name}
+                points={att.points}
+                dieRank={att.dieRank}
+                increment={() => incrementAttribute(att.name)}
+                decrement={() => decrementAttribute(att.name)}
+              />
+            ))}
+        </div>
+<div className="card">
+        Skills:
+        <br></br>
+          {Object.values(characterData.skills).map((skill: any) => (
+            <SwadeSkillDisplay
+              key={skill.name}
+              name={skill.name}
+              points={skill.points}
+              dieRank={skill.dieRank}
+              increment={() => incrementSkill(skill.name)}
+              decrement={() => decrementSkill(skill.name)}
+              isCore={skill.isCore}
+            />
+          ))}
+      </div>
+</div>
     </Layout>
   );
 }
+
+function SkillsSection({
+  skills = [],
+  points = "",
+}: {
+  skills: SwadeSkill[];
+  points: string;
+}) {}
 
 function SwadeAttributeDisplay({
   name,
@@ -99,12 +110,15 @@ function SwadeAttributeDisplay({
   dieRank,
   increment,
   decrement,
-}: any) {
+}: {name: string, points: string, dieRank: string, increment:() => void, decrement: () => void, isCore: boolean}) {
   return (
-    <div>
-      {name} {points} {dieRank}
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
+    <div className="swade-attributes__item">
+      <span>{`${SkillNames[name]} [${points}]: `}</span>
+      <SteppedValue
+        displayText={`${dieRank}`}
+        increment={increment}
+        decrement={decrement}
+      />
     </div>
   );
 }
@@ -116,12 +130,11 @@ function SwadeSkillDisplay({
   increment,
   decrement,
   isCore,
-}: any) {
+}: {name: string, points: string, dieRank: string, increment:() => void, decrement: () => void, isCore: boolean}) {
   return (
-    <div>
-      {name} {points} {dieRank} isCore: {isCore ? "True" : "False"}
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
+    <div className="swade-skills__item">
+{`${isCore ? 'X' : ''} ${name} [${points}]`}
+<SteppedValue displayText={dieRank} increment={increment} decrement={decrement} />
     </div>
   );
 }

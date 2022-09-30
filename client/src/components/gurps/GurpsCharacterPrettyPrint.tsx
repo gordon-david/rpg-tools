@@ -16,7 +16,9 @@ export function GurpsCharacterPrettyPrint() {
           {Object.keys(character.basicTraits).map((k) => {
             const trait = character.basicTraits[k];
             return (
-              <div>{`${trait.displayName} (${trait.abbreviation}) ${trait.value} ${trait.points} .pts`}</div>
+              <div
+                key={trait.key}
+              >{`${trait.displayName} (${trait.abbreviation}) ${trait.value} ${trait.points} .pts`}</div>
             );
           })}
         </div>
@@ -27,7 +29,12 @@ export function GurpsCharacterPrettyPrint() {
             </h4>
             {Object.keys(character.extraPositiveTraits).map((k) => {
               const trait = character.extraPositiveTraits[k];
-              return <div> {`${trait.displayName} ${trait.points}`} </div>;
+              return (
+                <div key={trait.key}>
+                  {" "}
+                  {`${trait.displayName} ${trait.points}`}{" "}
+                </div>
+              );
             })}
           </div>
         ) : (
@@ -40,7 +47,12 @@ export function GurpsCharacterPrettyPrint() {
             </h4>
             {Object.keys(character.extraNegativeTraits).map((k) => {
               const trait = character.extraNegativeTraits[k];
-              return <div> {`${trait.displayName} ${trait.points}`} </div>;
+              return (
+                <div key={trait.key}>
+                  {" "}
+                  {`${trait.displayName} ${trait.points}`}{" "}
+                </div>
+              );
             })}
           </div>
         ) : (
@@ -55,7 +67,9 @@ export function GurpsCharacterPrettyPrint() {
             {Object.keys(character.skills).map((k) => {
               const trait = character.skills[k];
               return (
-                <div>{`${trait.displayName} (${trait.derivedAttribute.abbreviation}/${trait.skillDifficulty}) ${trait.value} [${trait.points}]`}</div>
+                <div
+                  key={trait.key}
+                >{`${trait.displayName} (${trait.derivedAttribute.abbreviation}/${trait.skillDifficulty}) ${trait.value} [${trait.points}]`}</div>
               );
             })}
           </div>

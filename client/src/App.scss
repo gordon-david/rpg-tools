@@ -142,6 +142,32 @@ nav {
     margin: 0;
   }
 }
+/* SWADE Character Creator */
+.swade-character {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  .card {
+    margin: 20px auto;
+    max-width: 300px;
+  }
+
+	.swade-attributes__item {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.swade-skills__item{
+		display: flex;
+		justify-content: space-between;
+	}
+	.stepped-value__display-text {
+		min-width: 3rem;
+		padding: 0 .25rem;
+	}
+}
 
 /* Gurps Character Creator */
 .gurps-character {
@@ -162,7 +188,7 @@ nav {
   margin: auto;
 
   .stepped-value__display-text {
-    width: 5em;
+    width: 5rem;
   }
 
   &__item {
