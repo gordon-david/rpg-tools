@@ -24,7 +24,7 @@ function DndCharacterContainer() {
 
   return (
     <section className="dnd-character">
-      <h1>D&D Character Creator</h1>
+      <h1>D&D 5E Character Creator</h1>
       <button onClick={clear}>clear</button>
       <div className="section  dnd-proficiency-bonus">
         <h4>Proficiency Bonus:</h4>
