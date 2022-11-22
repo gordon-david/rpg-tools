@@ -1,10 +1,10 @@
 import { Layout } from "../components/Layout";
-import Spells from "../components/dnd-character/Spells";
+import SpellTable from "../components/dnd-5e-spells/SpellTable";
 
 export function DndSpellsPage() {
   return (
     <Layout>
-      <Spells />
+      <SpellTable />
     </Layout>
   );
 }
