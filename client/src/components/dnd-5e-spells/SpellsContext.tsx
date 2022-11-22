@@ -1,100 +1,123 @@
 import { createContext } from "react";
-import { SchoolAbbreviation, SpellData } from './Types'
+import { SpellData, DND5ESpellSchool, Spell } from './Types'
 
 
-export type Spell = SpellData & { schoolText: string }
+const rawSpellData: SpellData = require("../../data/output.json")
 
-const _data: Spell[] = require("../../data/spells.json")["spell"].sort((a: SpellData, b: SpellData) => {
-    if (a["name"] < b["name"]) {
-        return -1;
-    }
-    if (a["name"] > b["name"]) {
-        return 1;
-    }
-    return 0;
-});
 
-let dataCache = {
+let spellData: { row: any, classText: any, allSpells: any, allClasses: any } = {
     row: {},
     classText: {},
     allSpells: [],
     allClasses: [],
 };
 
-const schoolText = (rawSchool: SchoolAbbreviation) => {
-    const schools = {
-        A: "Abjuration",
-        C: "Conjuration",
-        D: "Divination",
-        E: "Enchantment",
-        V: "Evocation",
-        I: "Illusion",
-        N: "Necromancy",
-        T: "Transmutation",
-    };
-    return schools[rawSchool];
-};
+// caches associative arrays that links to raw data
+const spellCache = (() => {
 
-function collectClasses() {
-    const classSet = new Set();
+    return {}
+})()
 
-    _data.forEach((r) => {
-        r["classes"]["fromClassList"]
-            .map((e) => e.name)
-            .forEach((c) => classSet.add(c));
-    });
 
-    dataCache.allClasses = [...classSet].sort();
-}
+type SortBy = "name" | "school" | "class" | "components"
+type SortDirection = "ascending" | "descending"
 
 const value = {
-    // get class text
-    classText(rowId) {
-        if ("classText" in dataCache && "rowId" in dataCache) {
-            return dataCache["classText"][rowId];
-        }
-
-        const text = _data[rowId]["classes"]["fromClassList"]
-            .map((e) => e.name)
-            .sort()
-            .join(", ");
-        dataCache["classText"][rowId] = text;
-
-        return text;
-    },
     // get component text
-    getAll() {
-        return _data;
+    getAll(): Spell[] {
+        return rawSpellData['spells'];
     },
-    getRow(rowId) {
-        if ("row" in dataCache && "rowId" in dataCache["row"]) {
-            return dataCache["row"][rowId];
-        }
-        const row = _data[rowId];
-        dataCache["row"][rowId] = {
-            name: [row["name"]],
-            level: [row["level"]],
-            classes: [
-                ...new Set(row["classes"]["fromClassList"].map((e) => e["name"])),
-            ].sort(),
-            components: Object.keys(row["components"]).sort().reverse(),
-            school: [schoolText(row["school"])],
-        };
-        return dataCache.row[rowId];
+    get(
+        { filters, sorting }
+            : {
+                filters?: { type: "school" | "class" | "components", values: string[] }[],
+                sorting?: { by: "name" | "school" | "class" | "components", direction: "ascending" | "descending" }
+            }
+            = { sorting: { by: "name", direction: "ascending" } }
+    ): Spell[] | [] {
+        const output: Spell[] = rawSpellData['spells'].map((spell: Spell) => {
+            let include = false
+
+            if (filters !== undefined) {
+
+                filters.forEach(filter => {
+                    switch (filter.type) {
+                        case "class":
+                            spell.classes.fromClassList.forEach(spellClass => filter.values.forEach(filterClass => {
+                                if (spellClass.name === filterClass)
+                                    include = true
+                            }))
+                            break
+                        case "components":
+                            break
+                        case "school":
+                            break
+                        default:
+                            break
+                    }
+                })
+
+                if (include) {
+                    return spell
+                }
+            }
+
+            return spell
+
+        })
+
+        if (sorting)
+            output.sort((prev: Spell, next: Spell) => {
+                let prevSortVal = ''
+                let nextSortVal = ''
+
+                switch (sorting.by) {
+                    case "name":
+                        prevSortVal = prev.name
+                        nextSortVal = next.name
+                        break
+                    case "school":
+                        prevSortVal = prev.school
+                        nextSortVal = next.school
+                        break
+                    case "class":
+                        prevSortVal = prev.classes.classesText
+                        nextSortVal = next.classes.classesText
+                        break
+                    case "components":
+                        prevSortVal = (prev.components.m) ? prevSortVal + "m" : prevSortVal
+                        prevSortVal = (prev.components.s) ? prevSortVal + "s" : prevSortVal
+                        prevSortVal = (prev.components.v) ? prevSortVal + "v" : prevSortVal
+
+                        nextSortVal = (next.components.m) ? nextSortVal + "m" : nextSortVal
+                        nextSortVal = (next.components.s) ? nextSortVal + "s" : nextSortVal
+                        nextSortVal = (next.components.v) ? nextSortVal + "v" : nextSortVal
+                        break
+                    default:
+                        return 0
+                }
+
+                if (prevSortVal < nextSortVal && sorting.direction === "ascending")
+                    return -1
+                if (prevSortVal > nextSortVal && sorting.direction === "ascending")
+                    return 1
+                if (prevSortVal < nextSortVal && sorting.direction === "descending")
+                    return 1
+                //if (prevSortVal > nextSortVal && sorting?.direction === "descending")
+                return -1
+            })
+
+        return output
     },
-    length: _data.length,
-    allSchools() {
-        if (dataCache.allSpells.length > 0) {
-            return dataCache.allSpells;
-        }
-        return [];
+    getSpellByID(id: number): Spell {
+        return rawSpellData['spells'][id];
     },
-    allClasses() {
-        if (dataCache.allClasses.length > 0) {
-            return dataCache.allClasses;
-        }
-        collectClasses();
-        return dataCache.allClasses;
+    numberOfSpells: rawSpellData['spells'].length,
+    allSchools(): string[] {
+        return rawSpellData['schools']
+    },
+    allClasses(): string[] {
+        return rawSpellData['classes'];
     },
 };
 
