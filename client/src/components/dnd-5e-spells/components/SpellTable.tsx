@@ -1,19 +1,17 @@
-import { Spell } from "../Types"
+import { Spell, TableColumn } from "../Types"
 
-export type Header = "Name"
-
-export const SpellTable = (props: { spells: Spell[], headerClicked(header: Header): void }) => {
-    const handleHeaderClick = (header: Header) => {
+export const SpellTable = (props: { spells: Spell[], headerClicked(header: TableColumn): void }) => {
+    const handleHeaderClick = (header: TableColumn) => {
         props.headerClicked(header)
     }
     return (
         <>
-        <button onClick={() => props.headerClicked('Name')}>click</button>
+        <button onClick={() => props.headerClicked('name')}>click</button>
             {props.spells.map(spell => <div>{spell.name}</div>)}
             <table>
                 <thead>
                     <tr>
-                        <th key={`spell-th-name`} onClick={() => handleHeaderClick('Name')}>Name</th>
+                        <th key={`spell-th-name`} onClick={() => handleHeaderClick('name')}>Name</th>
                     </tr>
                 </thead>
             </table>

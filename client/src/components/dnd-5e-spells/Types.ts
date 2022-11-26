@@ -58,3 +58,6 @@ export interface SpellData {
     backgrounds: string[],
     schools: DND5ESpellSchool[]
 }
+
+export type Filter = { type: "school" | "class" | "components", values: string[] }
+export type TableColumn = "school" | "class" | "name" | "components"
