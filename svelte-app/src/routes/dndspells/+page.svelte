@@ -1,6 +1,5 @@
 <script lang="ts">
 	import data from '$lib/json/spells.json';
-	import { writable, type Writable } from 'svelte/store';
 
 	type DND5ESpellSchool =
 		| 'Abjuration'
@@ -67,18 +66,11 @@
 	type TableColumn = 'school' | 'class' | 'name' | 'components';
 	type Sorting = { by: TableColumn; direction: 'ascending' | 'descending' };
 
-	// let sorting = { by: 'name', direction: 'ascending' };
+	let sorting = { by: 'name', direction: 'ascending' };
+	let filters: Filter[] = [];
+	let spells : Spell[] = [...data.spells] as Spell[];
 
-	const spellData = (function (data: SpellData) {
-		let $spells: Writable<Spell[]> = writable([...data.spells] as Spell[])
-		let $filters: Filter[] = [];
-
-		let sorting: Sorting = { by: 'name', direction: 'ascending' };
-
-		return {
-			spellsSubscribe: $spells.subscribe,
-			$filters,
-			toggleSorting(column: TableColumn) {
+			function toggleSorting(column: TableColumn) {
 				if (column === sorting.by)
 					sorting = {
 						by: sorting.by,
@@ -124,14 +116,9 @@
 					if (prevSortVal > nextSortVal) return -1;
 					return 1;
 				});
-				$spells = output;
-				console.log('spells', $spells);
+				spells = output;
 			}
-		};
-	})(data as SpellData);
 
-	spells = spellData.$spells;
-	filters = spellData.$filters;
 </script>
 
 <svelte:head>
@@ -140,8 +127,23 @@
 </svelte:head>
 
 <section>
-	<button on:click={() => spellData.toggleSorting('name')}>toggle sorting</button>
-	{#each spells as spell}
-		<p>{spell.name}</p>
-	{/each}
+	<button on:click={() => toggleSorting('name')}>toggle sorting</button>
+	<table>
+		<tr>
+			<th> name </th>
+		</tr>
+		{#each spells as spell}
+			<tr>
+
+				<td> {spell.name} </td>
+
+				<td>
+					{#each spell.entries as entry}
+						{entry}
+					{/each}
+				</td>
+
+			</tr>
+		{/each}
+	</table>
 </section>
