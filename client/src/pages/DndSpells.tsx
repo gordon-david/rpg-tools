@@ -1,13 +1,17 @@
-import { Layout } from "../components/Layout";
-import { SpellTable } from "components/dnd-5e-spells/components/SpellTable"
-import { useSpellDataService } from "components/dnd-5e-spells/hooks/useSpellsData";
-import { TableColumn } from "components/dnd-5e-spells/Types";
+import { SpellTable, TableColumn, useSpellDataService } from "feature/dndspells";
+import { Layout } from "lib/components/Layout";
+import { useState } from "react";
 
 export function DndSpellsPage() {
     const spellService = useSpellDataService();
+    const [checkboxes, setCheckboxes] = useState({});
 
     const handleHeaderClick = (header: TableColumn) => {
-        spellService.toggleSorting(header)
+        spellService.toggleSorting()
+    }
+
+    const updateFilter = (type: 'school' | 'components'| 'classes', name: string, isChecked: boolean) => {
+        
     }
 
     return (
@@ -15,12 +19,13 @@ export function DndSpellsPage() {
             <section>
                 <fieldset>
                     <legend>Schools</legend>
-                    <input 
-                    type="checkbox" 
-                    />
+                    <div>
+                        <input type="checkbox"/>
+                        <label htmlFor="abjuration">Abjuration</label>
+                    </div>
                 </fieldset>
             </section>
-            <SpellTable spells={spellService.spells} headerClicked={handleHeaderClick}/>
+            <SpellTable spells={spellService.spells} headerClicked={handleHeaderClick} />
         </Layout>
     );
 }

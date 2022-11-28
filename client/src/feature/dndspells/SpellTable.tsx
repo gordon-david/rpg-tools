@@ -1,4 +1,4 @@
-import { Spell, TableColumn } from "../Types"
+import type { Spell, TableColumn } from './types'
 
 export const SpellTable = (props: { spells: Spell[], headerClicked(header: TableColumn): void }) => {
     const handleHeaderClick = (header: TableColumn) => {

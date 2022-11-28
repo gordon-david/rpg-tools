@@ -5,7 +5,7 @@ import {
   GurpsCharacterModel,
   GurpsSkill,
   SkillDifficulty,
-} from "../core/gurps/GurpsCharacter";
+} from "../lib/core/gurps/GurpsCharacter";
 
 describe("Gurps Character Model", function () {
   describe("Basic Attributes", () => {
