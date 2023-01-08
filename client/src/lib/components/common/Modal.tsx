@@ -1,8 +1,12 @@
-export default function SpellModal({ showModal, setShowModal, content }) {
-  return (
-    <div
+import { useState } from "react"
+
+export default function Modal({ toggleModal, children }: { toggleModal: () => void, children: any }) {
+    const [show, setShow] = useState(false)
+
+   // return <div style={{display: show ? "block" : "None"}}> {children} </div>
+return <div
       style={{
-        display: showModal ? "default" : "none",
+        display: show? "default" : "none",
         position: "fixed",
         zIndex: 1,
         paddingTop: "20vh",
@@ -12,7 +16,7 @@ export default function SpellModal({ showModal, setShowModal, content }) {
         height: "100%",
         overflow: "auto",
         backgroundColor: "rgb(0, 0, 0)",
-        backgroundColor: "rgba(0,0,0,0.4)" /* Black w/ opacity */,
+        // backgroundColor: "rgba(0,0,0,0.4)" // Black w/ opacity
       }}
       className="spells-modal"
     >
@@ -26,9 +30,8 @@ export default function SpellModal({ showModal, setShowModal, content }) {
         }}
         className="spells-modal-content"
       >
-        <button onClick={() => setShowModal(false)}>close</button>
-        {JSON.stringify(content)}
+        <button onClick={() => setShow(false)}>close</button>
+      {children}
       </div>
     </div>
-  );
 }

@@ -1,5 +1,5 @@
-import DndCharacter from "../components/dnd-character/DndCharacter";
-import { Layout } from "../components/Layout";
+import DndCharacter from "lib/components/dnd-character/DndCharacter";
+import { Layout } from "lib/components/Layout";
 
 export function DndCharacterPage() {
   return (

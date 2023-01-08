@@ -1,5 +1,5 @@
-import { GurpsCharacter } from "../components/gurps/GurpsCharacter";
-import { Layout } from "../components/Layout";
+import { GurpsCharacter } from "lib/components/gurps/GurpsCharacter";
+import { Layout } from "lib/components/Layout";
 
 export function GurpsCharacterPage() {
   return (

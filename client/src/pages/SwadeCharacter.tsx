@@ -1,11 +1,7 @@
-import {
-  SwadeCharacter,
-  SwadeSkill,
-  SwadeAttribute,
-} from "../core/swade/swade-character";
+import { SwadeCharacter, SwadeAttribute, SwadeSkill } from "lib/core/swade/swade-character";
+import { SteppedValue } from "lib/components/common/StepValueNumericInput";
+import { Layout } from "lib/components/Layout";
 import { useState, useEffect } from "react";
-import { Layout } from "../components/Layout";
-import { SteppedValue } from "../components/common/StepValueNumericInput";
 
 function useSwadeCharacter() {
   const [wrapper, setWrapper] = useState({ character: new SwadeCharacter() });
