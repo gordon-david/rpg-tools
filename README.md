@@ -3,8 +3,6 @@
 This README written using conventions and suggestion found in the https://github.com/othnieldrew/Best-README-Template repository
 -->
 
-
-
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -20,21 +18,12 @@ This README written using conventions and suggestion found in the https://github
 [![MIT License][license-shield]][license-url]
 
 
-
-<!-- PROJECT LOGO -->
-<br />
 <div align="center">
-  <a href="https://github.com/gordon-david/rpg-tools">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
 <h3 align="center">RPG Tools</h3>
 
   <p align="center">
     project_description
-    <br />
-    <a href="https://github.com/gordon-david/rpg-tools"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/gordon-david/rpg-tools">View Demo</a>
     ·
@@ -77,9 +66,7 @@ This README written using conventions and suggestion found in the https://github
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Live Site Screenshot][product-screenshot]](https://google.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+This is a react application of tools built for various Roleplaying games.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -96,55 +83,45 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+The production version of the site is under the `prod/main` branch.
+
+### Branch Conventions
+
+Branches are grouped using the following naming convention: `<group>/<branch-name>`. The groups in use are...
+- `prod/`: used for the live, production versions of the project
+  - `prod/main`: is the main production version of the project.
+- `dev/`: used for development staging of features, bug fixes, etc.
+- `archive/`: used for archived, old features, and examples
+
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* yarn
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo and open the production branch
    ```sh
    git clone https://github.com/gordon-david/rpg-tools.git
+   git checkout prod/main
    ```
-3. Install NPM packages
+2. Install packages
    ```sh
-   npm install
+   yarn install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+3. Run development environment (starts a local development server)
+    ```sh
+    yarn run dev
+    ```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- ROADMAP -->
 ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
 
 See the [open issues](https://github.com/gordon-david/rpg-tools/issues) for a full list of proposed features (and known issues).
 
@@ -182,20 +159,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/gordon-david/rpg-tools](https://github.com/gordon-david/rpg-tools)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
-* []()
-* []()
+David Gordon - gordopdavid@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
