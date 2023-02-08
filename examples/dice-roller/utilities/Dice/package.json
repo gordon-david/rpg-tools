@@ -5,9 +5,6 @@
     "author": "David Gordon <d.phi.gordon@gmail.com>",
     "license": "MIT",
     "main": "./index.js",
-    "scripts": {
-
-    },
     "dependencies": {},
     "devDependencies": {}
 }

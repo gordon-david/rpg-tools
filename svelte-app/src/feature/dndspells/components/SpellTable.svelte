@@ -5,6 +5,10 @@
 	export let data: Spell[];
 
 	export let headerClicked: (header: TableColumn) => void;
+
+    function test(){
+        console.log("click?")
+    }
 </script>
 
 <table>

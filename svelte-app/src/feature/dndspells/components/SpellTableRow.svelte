@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { Spell } from '../types';
+    import SpellDescriptionModal from './SpellDescriptionModal.svelte';
 
 	export let spell: Spell;
+    let isOpenModal = false;
 
 	function shortDescription(text: string[]) {
 		let shortText = '';
@@ -26,7 +28,8 @@
 	}
 </script>
 
-<tr>
+<SpellDescriptionModal {isOpenModal} on:closeModal={() => isOpenModal = false} {spell}/>
+<tr on:click={() => isOpenModal? isOpenModal = false : isOpenModal = true}>
 	<td>{spell.name}</td>
 	<td>{spell.school}</td>
     <td>{spell.classes.classesText}</td>

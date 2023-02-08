@@ -1,0 +1,1 @@
+export { GurpsCharacter } from "./GurpsCharacter";
