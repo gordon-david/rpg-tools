@@ -39,11 +39,10 @@ a:hover {
 }
 
 .header__link {
-    padding: 0rem 0.5rem;
+    padding: 0rem 0.85rem;
     margin: 0;
     display: flex;
     align-items: center;
-    font-weight: bold;
     font-size: large;
 }
 
