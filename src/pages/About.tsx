@@ -1,8 +1,6 @@
 import { Header } from "../shared/components/Header";
+import { PageLayout } from "../shared/components/PageLayout";
 
 export function About(){
-    return <div>
-        <Header />
-        about...
-    </div>
+    return <PageLayout>...about</PageLayout>
 }
