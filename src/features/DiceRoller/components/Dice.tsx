@@ -22,12 +22,12 @@ export function Dice({
             className="dice"
             id={diceType}>
             <button
-                className='increment'
+                className='dice__btn'
                 onClick={increment}
             >
                 {displayName}
             </button>
-            <div className='amount'>
+            <div className='dice__amount'>
                 {amount}
             </div>
         </div>

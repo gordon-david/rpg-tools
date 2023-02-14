@@ -1,35 +1,76 @@
 import { useEffect, useState } from "react";
 import { Dice } from "../components/Dice";
-import { DicePool } from "../components/DicePool";
-import { DiceKey, PolyhedralDicePoolFactory } from "../core/Dice";
-
+import { DiceKey, DicePool, PolyhedralDicePoolFactory } from "../core/Dice";
+import '../DiceRoller.css'
 
 export function DiceRoller() {
-    const [dicePool, setDicePool] = useState(PolyhedralDicePoolFactory())
-    const [results, setResults] = useState([])
-    const [diceMap, setDiceMap] = useState({})
+  const [dicePoolWrapper, setDicePoolWrapper] = useState<{
+    dicePool: DicePool;
+  }>({
+    dicePool: PolyhedralDicePoolFactory(),
+  });
+  const [results, setResults] = useState<number[]>([]);
 
-    useEffect(() => {
-        setDiceMap(dicePool.getDiceMap)
-    }, [dicePool])
+  useEffect(() => {
+    console.log("updating");
+  });
 
-    function addDice(key: DiceKey){
-        // add to dicePool
-        dicePool.add(key)
-        setDicePool(dicePool)
-    }
+  function update() {
+    setDicePoolWrapper((dicePoolWrapper) => ({ ...dicePoolWrapper }));
+  }
 
-    function removeDice(key: DiceKey){
-        dicePool.remove(key)
-        setDicePool(dicePool)
-    }
+  function addDice(key: DiceKey) {
+    dicePoolWrapper.dicePool.add(key);
+    update();
+  }
 
-    return <>
+  function removeDice(key: DiceKey) {
+    dicePoolWrapper.dicePool.remove(key);
+    update();
+  }
 
-        <div className="dice-roller">
-            <DicePool />
-            <div>Roll Results List</div>
+  function clear() {
+    dicePoolWrapper.dicePool.clear();
+    update();
+  }
+
+  function roll() {
+    let result = dicePoolWrapper.dicePool.roll();
+
+    setResults((results) => [result, ...results]);
+    update();
+  }
+
+  return (
+    <>
+      <div className="dice-roller">
+        <div className="dice-roller__dice-grid">
+          {dicePoolWrapper.dicePool.getDice().map((dice) => (
+            <Dice
+              key={dice.key}
+              increment={() => addDice(dice.key)}
+              amount={dicePoolWrapper.dicePool.count(dice.key)}
+              diceType={dice.key}
+              displayName={dice.displayName}
+            />
+          ))}
         </div>
+        <div className="dice-roller__controls">
+          <button id="dice-roller__clear" onClick={clear}>
+            Clear
+          </button>
+          <button id="dice-roller__roll" onClick={roll}>
+            Roll
+          </button>
+        </div>
+        <ul id="dice-roller__results">
+          {results.map((result, index) => (
+            <li key={`${result}-${index}`} id="result">
+              {result}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
+  );
 }
-
